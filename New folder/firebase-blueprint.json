@@ -1,0 +1,68 @@
+{
+  "entities": {
+    "Appointment": {
+      "title": "Appointment",
+      "description": "A scheduled visit for a pet.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "petName": { "type": "string" },
+        "ownerName": { "type": "string" },
+        "ownerEmail": { "type": "string" },
+        "petType": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "service": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "completed", "cancelled"] },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["petName", "ownerName", "date", "service", "status"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Medical products and supplies in the store.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "quantity": { "type": "number" },
+        "price": { "type": "number" },
+        "image": { "type": "string" },
+        "gallery": { "type": "array" },
+        "badge": { "type": "string" },
+        "lastUpdated": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "quantity", "price"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer orders from the store.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "customer": { "type": "object" },
+        "items": { "type": "array" },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "shipped", "delivered"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["customer", "items", "totalAmount", "status"]
+    }
+  },
+  "firestore": {
+    "appointments": {
+      "schema": "Appointment",
+      "description": "Collection of clinic appointments."
+    },
+    "products": {
+      "schema": "Product",
+      "description": "Collection of medical products."
+    },
+    "orders": {
+      "schema": "Order",
+      "description": "Collection of customer orders."
+    }
+  }
+}
